@@ -1,0 +1,42 @@
+{
+  "name": "Mateus Maia Gutierrez",
+  "title": "Software Developer",
+  "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "links": {
+    "github": "https://github.com/MateusGutierrez",
+    "linkedin": "https://linkedin.com/in/your-linkedin",
+    "email": "your@email.com"
+  },
+  "experience": [
+    {
+      "role": "Software Engineer",
+      "company": "Company Name",
+      "period": "2024 - Present",
+      "description": "Developed and maintained web applications using modern technologies. Collaborated with cross-functional teams to deliver high-quality software."
+    },
+    {
+      "role": "Junior Developer",
+      "company": "Another Company",
+      "period": "2022 - 2024",
+      "description": "Built scalable solutions and participated in code reviews and agile sprints. Contributed to the architecture of key systems."
+    },
+    {
+      "role": "Intern",
+      "company": "Startup Inc.",
+      "period": "2021 - 2022",
+      "description": "Assisted in developing features for the company's main product. Gained hands-on experience with full-stack development."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor's in Computer Science",
+      "institution": "Your University",
+      "period": "2018 - 2022"
+    }
+  ],
+  "skills": {
+    "Languages": ["JavaScript", "TypeScript", "Python", "Go", "SQL", "HTML/CSS"],
+    "Frameworks": ["React", "Next.js", "Node.js", "Svelte", "Tailwind CSS", "Express"],
+    "Tools": ["Git", "Docker", "AWS", "PostgreSQL", "Linux", "CI/CD"]
+  }
+}

@@ -10,6 +10,7 @@
         hardDrive,
         wallpaper,
         queueCommand,
+        queueProgram,
     } from "../../lib/store";
     import StartMenu from "./start_menu.svelte";
     import Welcome from "./welcome.svelte";
@@ -64,6 +65,11 @@
         ]);
 
         welcome_scene.self = welcome_scene;
+
+        // Auto-open portfolio after welcome screen
+        setTimeout(() => {
+            queueProgram.set({ path: './programs/portfolio.svelte' });
+        }, 8000);
 
     });
 

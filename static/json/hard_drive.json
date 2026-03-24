@@ -178,7 +178,8 @@
       "4X92Ah8Hm1kvoC6PGWTVFB",
       "8JtxSMGZFFUe1DBH4Nm2j5",
       "jZ2bTHBno2363BxGs1LHCN",
-      "rugcCBKHiSYK5RFdud7m3p"
+      "rugcCBKHiSYK5RFdud7m3p",
+      "portfolioDesktopShortcut1"
     ],
     "date_created": 1676799354180,
     "date_modified": 1676799354180,
@@ -1218,6 +1219,24 @@
       "j8VxQaSrSLWLgMA6gkvoaG",
       "pc52uUFgKYF4Ew1Mvi1UXb"
     ],
+    "date_created": 1676799354180,
+    "date_modified": 1676799354180,
+    "sort_option": 0,
+    "sort_order": 0
+  },
+  "portfolioDesktopShortcut1": {
+    "id": "portfolioDesktopShortcut1",
+    "type": "file",
+    "basename": "My Portfolio",
+    "name": "My Portfolio.exe",
+    "storage_type": "fake",
+    "url": "./programs/portfolio.svelte",
+    "ext": ".exe",
+    "parent": "nt1QdU9Sws26H26UNQZcQU",
+    "size": 0,
+    "executable": true,
+    "icon": "/images/xp/icons/Briefcase.png",
+    "children": [],
     "date_created": 1676799354180,
     "date_modified": 1676799354180,
     "sort_option": 0,

@@ -6,6 +6,12 @@
 
     let col_1 = [
         {
+            name: 'My Portfolio',
+            icon: '/images/xp/icons/Briefcase.png',
+            path: './programs/portfolio.svelte',
+            font: 'bold'
+        },
+        {
             name: 'Internet Explorer',
             icon: '/images/xp/icons/InternetExplorer6.png',
             path: './programs/internet_explorer.svelte',
@@ -454,8 +460,12 @@
     <div class="h-[3px] absolute top-0 left-[3px] right-[3px]" style="background: linear-gradient(to right, transparent 0px, rgba(255, 255, 255, 0.3) 1%, rgba(255, 255, 255, 0.5) 2%, rgba(255, 255, 255, 0.5) 95%, rgba(255, 255, 255, 0.3) 98%, rgba(255, 255, 255, 0.2) 99%, transparent 100%);
     box-shadow: rgb(14 96 203) 0px -1px 1px inset;"></div>
 
-    <div class="w-full h-[70px] rounded-t-md shrink-0"
+    <div class="w-full h-[70px] rounded-t-md shrink-0 flex flex-row items-center px-3 gap-3"
         style:background-image="linear-gradient(rgb(24, 104, 206) 0%, rgb(14, 96, 203) 12%, rgb(14, 96, 203) 20%, rgb(17, 100, 207) 32%, rgb(22, 103, 207) 33%, rgb(27, 108, 211) 47%, rgb(30, 112, 217) 54%, rgb(36, 118, 220) 60%, rgb(41, 122, 224) 65%, rgb(52, 130, 227) 77%, rgb(55, 134, 229) 79%, rgb(66, 142, 233) 90%, rgb(71, 145, 235) 100%)">
+        <div class="w-[48px] h-[48px] rounded-md border-2 border-white/60 bg-[#316AC5] flex items-center justify-center text-white text-[20px] font-bold shadow-md overflow-hidden">
+            M
+        </div>
+        <span class="text-white text-[14px] font-bold drop-shadow-sm">Mateus</span>
     </div>
 
     <div class="shrink-0 h-[2px] w-full" style:background-image="linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgb(218, 136, 74) 50%, rgba(0, 0, 0, 0) 100%)">

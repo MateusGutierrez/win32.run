@@ -4,7 +4,7 @@
     import {set, get} from 'idb-keyval';
     import axios from 'axios';
     import { hardDrive, wallpaper, contextMenu } from '../../lib/store';
-    import { bliss_wallpaper, wallpapers_folder, SortOptions, SortOrders } from '../../lib/system';
+    import { bliss_wallpaper, wallpapers_folder, SortOptions, SortOrders, desktop_folder } from '../../lib/system';
     let dispatcher = createEventDispatcher();
 
     let assets_loaded = false;
@@ -63,6 +63,7 @@
             await set('hard_drive', hard_drive);
         }
         migrate_files_format(hard_drive);
+        ensure_portfolio_shortcut(hard_drive);
         console.log(hard_drive);
         hardDrive.set(hard_drive);
     }
@@ -88,6 +89,32 @@
             if(obj.sort_order == null){
                 obj.sort_order = SortOrders.ASCENDING;
             }
+        }
+    }
+
+    function ensure_portfolio_shortcut(drive){
+        const id = 'portfolioDesktopShortcut1';
+        if(drive[id] != null) return;
+        drive[id] = {
+            id,
+            type: 'file',
+            basename: 'My Portfolio',
+            name: 'My Portfolio.exe',
+            storage_type: 'fake',
+            url: './programs/portfolio.svelte',
+            ext: '.exe',
+            parent: desktop_folder,
+            size: 0,
+            executable: true,
+            icon: '/images/xp/icons/Briefcase.png',
+            children: [],
+            date_created: (new Date()).getTime(),
+            date_modified: (new Date()).getTime(),
+            sort_option: 0,
+            sort_order: 0
+        };
+        if(drive[desktop_folder] && !drive[desktop_folder].children.includes(id)){
+            drive[desktop_folder].children.unshift(id);
         }
     }
 

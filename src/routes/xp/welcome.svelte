@@ -44,7 +44,15 @@
     </div>
     <div class="h-[2px] bg-[linear-gradient(45deg,#466dcd,#c7ddff,#b0c9f7,#5a7edc)] shrink-0"></div>
     <div class="grow bg-[radial-gradient(circle_at_5%_5%,#91b1ef_0,#7698e6_6%,#5a7edc_12%)] relative overflow-hidden">
-        <span class="absolute top-[40%] left-[50%] text-[42px] text-slate-50 italic font-bold">Welcome</span>
+        <div class="absolute top-[35%] left-[50%] -translate-x-[50%] flex flex-col items-center">
+            <span class="text-[42px] text-slate-50 italic font-bold">Welcome</span>
+            <div class="flex items-center gap-3 mt-6 bg-white/10 rounded-lg px-6 py-3">
+                <div class="w-[48px] h-[48px] rounded-full bg-[#316AC5] flex items-center justify-center text-white text-[20px] font-bold border-2 border-white/60">
+                    M
+                </div>
+                <span class="text-[20px] text-slate-50 font-bold">Mateus</span>
+            </div>
+        </div>
     </div>
   
     <div class="h-[2px] bg-[linear-gradient(45deg,#003399,#f99736,#c2814d,#00309c)] shrink-0"></div>
