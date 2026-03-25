@@ -1,42 +1,59 @@
 {
   "name": "Mateus Maia Gutierrez",
   "title": "Software Developer",
-  "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "bio": "Software developer committed to technical excellence and human values. Believes that development goes beyond code, prioritizing collaboration, empathy and transparency. It continually seeks to create solutions that positively impact people's lives, aiming for a more inclusive and enriching digital experience.",
   "links": {
     "github": "https://github.com/MateusGutierrez",
-    "linkedin": "https://linkedin.com/in/your-linkedin",
-    "email": "your@email.com"
+    "linkedin": "https://www.linkedin.com/in/mateus-gutierrez-a991aa1b9/",
+    "email": "mateusgutierrez9@email.com"
   },
   "experience": [
     {
-      "role": "Software Engineer",
-      "company": "Company Name",
-      "period": "2024 - Present",
-      "description": "Developed and maintained web applications using modern technologies. Collaborated with cross-functional teams to deliver high-quality software."
+      "role": "Software Developer",
+      "company": "Blender Digital",
+      "period": "Nov 2025 - Present",
+      "description": "Developing and maintaining web applications with React, TypeScript and Node.js. Building responsive interfaces with Tailwind CSS, modeling and optimizing PostgreSQL databases, and working with Supabase for auth, storage and backend services. Participating in technical decisions, architecture planning, code reviews and performance optimization."
     },
     {
-      "role": "Junior Developer",
-      "company": "Another Company",
-      "period": "2022 - 2024",
-      "description": "Built scalable solutions and participated in code reviews and agile sprints. Contributed to the architecture of key systems."
+      "role": "Software Developer",
+      "company": "MXM Group",
+      "period": "Jun 2025 - Jan 2026",
+      "description": "Worked with React, Next.js, Vue, Node.js, Express and MongoDB. Built responsive, intuitive interfaces with Styled-components and Tailwind. Managed state with Context API, Zustand and Redux. Consumed REST APIs and Webhooks. Applied SSR, Framer Motion animations and performance optimization. Followed Scrum methodology."
     },
     {
-      "role": "Intern",
-      "company": "Startup Inc.",
-      "period": "2021 - 2022",
-      "description": "Assisted in developing features for the company's main product. Gained hands-on experience with full-stack development."
+      "role": "Web Developer",
+      "company": "Lagoasoft",
+      "period": "Aug 2023 - Dec 2024",
+      "description": "Developed web applications and contributed to full-stack projects over 1 year and 5 months in Florianópolis."
+    },
+    {
+      "role": "Peer Coach",
+      "company": "Kenzie Academy Brasil",
+      "period": "Mar 2023 - Sep 2023",
+      "description": "Mentored and supported fellow students in their learning journey, providing technical guidance and fostering collaborative learning in Florianópolis."
+    },
+    {
+      "role": "Apprentice",
+      "company": "Bosch",
+      "period": "Feb 2018 - Nov 2019",
+      "description": "Industrial apprenticeship program at Bosch, gaining foundational technical and professional experience over 1 year and 10 months."
     }
   ],
   "education": [
     {
-      "degree": "Bachelor's in Computer Science",
-      "institution": "Your University",
-      "period": "2018 - 2022"
+      "degree": "Bachelor of Engineering - Software Engineering",
+      "institution": "Positivo University",
+      "period": "Oct 2023 - Oct 2027"
+    },
+    {
+      "degree": "Fullstack Developer - Information Technology",
+      "institution": "Kenzie Academy Brasil",
+      "period": "2022"
     }
   ],
   "skills": {
-    "Languages": ["JavaScript", "TypeScript", "Python", "Go", "SQL", "HTML/CSS"],
-    "Frameworks": ["React", "Next.js", "Node.js", "Svelte", "Tailwind CSS", "Express"],
-    "Tools": ["Git", "Docker", "AWS", "PostgreSQL", "Linux", "CI/CD"]
+    "Languages": ["JavaScript", "TypeScript", "Python", "SQL", "HTML/CSS"],
+    "Frameworks": ["React", "Next.js", "Node.js", "Svelte", "Tailwind CSS", "Express", "Nest.js", "Fastify"],
+    "Tools": ["Git", "Docker", "AWS", "PostgreSQL", "Linux", "CI/CD", "Supabase", "Mongo DB"]
   }
 }
