@@ -92,29 +92,49 @@
         }
     }
 
+    // Desktop shortcuts for the portfolio programs. Created once; if the visitor
+    // deletes one, it stays deleted (the entry already exists in their drive).
+    const portfolio_shortcuts = [
+        { id: 'portfolioDesktopShortcut1', name: 'My Portfolio', url: './programs/portfolio.svelte', icon: '/images/xp/icons/Briefcase.png' },
+        { id: 'myMusicDesktopShortcut1', name: 'My Music', url: './programs/my_music.svelte', icon: '/images/xp/icons/MyMusic.png' },
+        { id: 'myGamesDesktopShortcut1', name: 'My Games', url: './programs/my_games.svelte', icon: '/images/xp/icons/GameController.png' }
+    ];
+
     function ensure_portfolio_shortcut(drive){
-        const id = 'portfolioDesktopShortcut1';
-        if(drive[id] != null) return;
-        drive[id] = {
-            id,
-            type: 'file',
-            basename: 'My Portfolio',
-            name: 'My Portfolio.exe',
-            storage_type: 'fake',
-            url: './programs/portfolio.svelte',
-            ext: '.exe',
-            parent: desktop_folder,
-            size: 0,
-            executable: true,
-            icon: '/images/xp/icons/Briefcase.png',
-            children: [],
-            date_created: (new Date()).getTime(),
-            date_modified: (new Date()).getTime(),
-            sort_option: 0,
-            sort_order: 0
-        };
-        if(drive[desktop_folder] && !drive[desktop_folder].children.includes(id)){
-            drive[desktop_folder].children.unshift(id);
+        let previous = null;
+        for(let shortcut of portfolio_shortcuts){
+            const {id, name, url, icon} = shortcut;
+            if(drive[id] == null){
+                drive[id] = {
+                    id,
+                    type: 'file',
+                    basename: name,
+                    name: name + '.exe',
+                    storage_type: 'fake',
+                    url,
+                    ext: '.exe',
+                    parent: desktop_folder,
+                    size: 0,
+                    executable: true,
+                    icon,
+                    children: [],
+                    date_created: (new Date()).getTime(),
+                    date_modified: (new Date()).getTime(),
+                    sort_option: 0,
+                    sort_order: 0
+                };
+                let children = drive[desktop_folder]?.children;
+                if(children && !children.includes(id)){
+                    // Keep the shortcuts next to each other
+                    let index = previous ? children.indexOf(previous) : -1;
+                    if(index >= 0){
+                        children.splice(index + 1, 0, id);
+                    } else {
+                        children.unshift(id);
+                    }
+                }
+            }
+            previous = id;
         }
     }
 

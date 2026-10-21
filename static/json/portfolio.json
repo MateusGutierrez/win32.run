@@ -1,42 +1,62 @@
 {
   "name": "Mateus Maia Gutierrez",
   "title": "Software Developer",
+  "photo": "https://github.com/MateusGutierrez.png",
+  "location": "Brazil",
+  "resume_pdf": "/files/resume.pdf",
   "bio": "Software developer committed to technical excellence and human values. Believes that development goes beyond code, prioritizing collaboration, empathy and transparency. It continually seeks to create solutions that positively impact people's lives, aiming for a more inclusive and enriching digital experience.",
   "links": {
     "github": "https://github.com/MateusGutierrez",
     "linkedin": "https://www.linkedin.com/in/mateus-gutierrez-a991aa1b9/",
-    "email": "mateusgutierrez9@email.com"
+    "email": "mateusgutierrez9@gmail.com"
   },
   "experience": [
     {
       "role": "Software Developer",
       "company": "Blender Digital",
       "period": "Nov 2025 - Present",
-      "description": "Developing and maintaining web applications with React, TypeScript and Node.js. Building responsive interfaces with Tailwind CSS, modeling and optimizing PostgreSQL databases, and working with Supabase for auth, storage and backend services. Participating in technical decisions, architecture planning, code reviews and performance optimization."
+      "points": [
+        "Developing and maintaining web applications with React, TypeScript and Node.js.",
+        "Building responsive interfaces with Tailwind CSS.",
+        "Modeling and optimizing PostgreSQL databases; using Supabase for auth, storage and backend services.",
+        "Participating in technical decisions, architecture planning, code reviews and performance optimization."
+      ]
     },
     {
       "role": "Software Developer",
       "company": "MXM Group",
       "period": "Jun 2025 - Jan 2026",
-      "description": "Worked with React, Next.js, Vue, Node.js, Express and MongoDB. Built responsive, intuitive interfaces with Styled-components and Tailwind. Managed state with Context API, Zustand and Redux. Consumed REST APIs and Webhooks. Applied SSR, Framer Motion animations and performance optimization. Followed Scrum methodology."
+      "points": [
+        "Worked with React, Next.js, Vue, Node.js, Express and MongoDB.",
+        "Built responsive, intuitive interfaces with Styled-components and Tailwind.",
+        "Managed state with Context API, Zustand and Redux; consumed REST APIs and Webhooks.",
+        "Applied SSR, Framer Motion animations and performance optimization, following Scrum."
+      ]
     },
     {
       "role": "Web Developer",
       "company": "Lagoasoft",
       "period": "Aug 2023 - Dec 2024",
-      "description": "Developed web applications and contributed to full-stack projects over 1 year and 5 months in Florianópolis."
+      "points": [
+        "Developed web applications and contributed to full-stack projects over 1 year and 5 months in Florianópolis."
+      ]
     },
     {
       "role": "Peer Coach",
       "company": "Kenzie Academy Brasil",
       "period": "Mar 2023 - Sep 2023",
-      "description": "Mentored and supported fellow students in their learning journey, providing technical guidance and fostering collaborative learning in Florianópolis."
+      "points": [
+        "Mentored and supported fellow students in their learning journey.",
+        "Provided technical guidance and fostered collaborative learning."
+      ]
     },
     {
       "role": "Apprentice",
       "company": "Bosch",
       "period": "Feb 2018 - Nov 2019",
-      "description": "Industrial apprenticeship program at Bosch, gaining foundational technical and professional experience over 1 year and 10 months."
+      "points": [
+        "Industrial apprenticeship program, gaining foundational technical and professional experience over 1 year and 10 months."
+      ]
     }
   ],
   "education": [
@@ -51,9 +71,25 @@
       "period": "2022"
     }
   ],
+  "projects": [],
   "skills": {
     "Languages": ["JavaScript", "TypeScript", "Python", "SQL", "HTML/CSS"],
     "Frameworks": ["React", "Next.js", "Node.js", "Svelte", "Tailwind CSS", "Express", "Nest.js", "Fastify"],
     "Tools": ["Git", "Docker", "AWS", "PostgreSQL", "Linux", "CI/CD", "Supabase", "Mongo DB"]
+  },
+  "certifications": [],
+  "interests": {
+    "spotify": {
+      "profile": "",
+      "embed": ""
+    },
+    "steam": {
+      "profile": "",
+      "games": []
+    },
+    "psn": {
+      "profile": "",
+      "games": []
+    }
   }
 }

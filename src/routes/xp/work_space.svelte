@@ -289,6 +289,20 @@
             runningPrograms.update(values => {
                 return [...values, program];
             })
+        } else if(path == './programs/my_music.svelte' || path == './programs/my_games.svelte'){
+            const Program = path == './programs/my_music.svelte'
+                ? (await import('./programs/my_music.svelte')).default
+                : (await import('./programs/my_games.svelte')).default;
+            let program = new Program({
+                target: node_ref,
+                props: {id: short.generate(), parentNode: node_ref, exec_path: path}
+            });
+            program.self = program;
+
+            //add to program tray
+            runningPrograms.update(values => {
+                return [...values, program];
+            })
         } else if(path == './programs/portfolio.svelte'){
             const Program = (await import('./programs/portfolio.svelte')).default;
             let program = new Program({
