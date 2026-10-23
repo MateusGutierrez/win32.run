@@ -2,11 +2,10 @@
     // Profile window styled after XP.css (https://botoxparty.github.io/XP.css):
     // tabs, tab panel, group boxes, tree view, progress bar and buttons use its exact values.
     import Window from '../../../lib/components/xp/Window.svelte';
-    import { runningPrograms, hardDrive, queueProgram } from '../../../lib/store';
-    import { desktop_folder } from '../../../lib/system';
+    import { runningPrograms, queueProgram } from '../../../lib/store';
     import { onMount } from 'svelte';
     import axios from 'axios';
-    import { build_skill_groups } from '../../../lib/skills';
+    import { build_skill_groups, build_core_stack } from '../../../lib/skills';
 
     export let id;
     export let window;
@@ -15,7 +14,6 @@
     export let exec_path;
 
     const GITHUB_USER = 'MateusGutierrez';
-    const RESUME_FS_ID = 'portfolioResumePdf';
 
     let profile = null;
     let profileLoaded = false;
@@ -26,14 +24,9 @@
 
     let photoFailed = false;
     let activeTab = 'General';
-    let selectedSkill = null;
 
-    $: skillGroups = build_skill_groups(profile?.skills || {}, profile?.experience || []);
-    // The most used skills at work, by how many jobs mention them
-    $: coreStack = skillGroups.flatMap(g => g.items)
-        .filter(s => s.jobs.length)
-        .sort((a, b) => b.jobs.length - a.jobs.length)
-        .slice(0, 6);
+    $: skillGroups = build_skill_groups(profile?.skills || {});
+    $: coreStack = build_core_stack(profile?.core_stack || []);
 
     // Live data from /api/steam and /api/spotify (null = not configured / unavailable)
     let steam = null;
@@ -92,7 +85,6 @@
                 }
             }
             profile = data;
-            if (profile?.name) window?.update_title(`${profile.name} Properties`);
         } catch (e) {
             console.error('Failed to load portfolio.json', e);
         }
@@ -120,32 +112,10 @@
         self.$destroy();
     }
 
-    // Opens the resume inside the XP Foxit Reader. The file entry is registered
-    // in the virtual drive (but not listed in any folder) so Foxit can load it.
+    // Opens the resume in Internet Explorer, which shows it with the browser's PDF viewer
     function open_resume() {
         if (!profile?.resume_pdf) return;
-        const now = Date.now();
-        const fs_item = {
-            id: RESUME_FS_ID,
-            type: 'file',
-            basename: 'Resume',
-            name: 'Resume.pdf',
-            ext: '.pdf',
-            storage_type: 'remote',
-            url: profile.resume_pdf,
-            parent: desktop_folder,
-            size: 0,
-            children: [],
-            date_created: now,
-            date_modified: now,
-            sort_option: 0,
-            sort_order: 0
-        };
-        hardDrive.update(drive => {
-            drive[RESUME_FS_ID] = fs_item;
-            return drive;
-        });
-        queueProgram.set({ path: './programs/foxit_reader.svelte', fs_item });
+        queueProgram.set({ path: './programs/internet_explorer.svelte', fs_item: { url: profile.resume_pdf } });
     }
 
     function download_resume() {
@@ -187,12 +157,12 @@
     };
 
     export let options = {
-        title: 'My Portfolio Properties',
+        title: 'My Resume',
         min_width: 340,
         min_height: 380,
         width: Math.min(ws_size.width - 20, 560),
         height: Math.min(ws_size.height - 20, 620),
-        icon: '/images/xp/icons/UserAccounts.png',
+        icon: '/images/xp/icons/Briefcase.png',
         id: id,
         // Own key for the saved window rect, so the old, bigger layout isn't restored
         exec_path: exec_path ? `${exec_path}#profile-viewer` : exec_path
@@ -364,44 +334,20 @@
                 </p>
 
             {:else if activeTab === 'Skills'}
-                <!-- Details: core stack, or the selected skill -->
-                <fieldset>
-                    <legend>{selectedSkill ? selectedSkill.name : 'Core Stack'}</legend>
-                    {#if selectedSkill}
-                        <div class="flex gap-[12px] items-start">
-                            <div class="skill-logo big shrink-0">
-                                <img src={selectedSkill.icon} alt="">
-                            </div>
-                            <div class="min-w-0 grow flex flex-col gap-[3px]">
-                                <b>{selectedSkill.name}</b>
-                                <span>Category: {selectedSkill.category}</span>
-                                {#if selectedSkill.level}<span>Level: {selectedSkill.level}</span>{/if}
-                                {#if selectedSkill.jobs.length}
-                                    <span class="mt-[4px]">Used at:</span>
-                                    <ul class="bullets">
-                                        {#each selectedSkill.jobs as job}
-                                            <li><b>{job.company}</b>, {job.role} ({job.period})</li>
-                                        {/each}
-                                    </ul>
-                                {/if}
-                                <div class="mt-[6px]">
-                                    <button class="xp-button" on:click={() => selectedSkill = null}>Show Core Stack</button>
-                                </div>
-                            </div>
-                        </div>
-                    {:else}
-                        <p class="mb-[8px]">The technologies I use the most at work. Click any icon to see where I used it.</p>
+                {#if coreStack.length}
+                    <fieldset>
+                        <legend>Core Stack</legend>
+                        <p class="mb-[8px]">The technologies I use the most at work.</p>
                         <div class="core-stack">
                             {#each coreStack as skill}
-                                <button class="core-item" on:click={() => selectedSkill = skill} title={skill.name}>
+                                <div class="core-item" title={skill.name}>
                                     <span class="skill-logo big"><img src={skill.icon} alt=""></span>
                                     <span>{skill.name}</span>
-                                    <span class="text-[#808080]">{skill.jobs.length} job{skill.jobs.length === 1 ? '' : 's'}</span>
-                                </button>
+                                </div>
                             {/each}
                         </div>
-                    {/if}
-                </fieldset>
+                    </fieldset>
+                {/if}
 
                 <!-- Categories in Tiles view -->
                 {#each skillGroups as group}
@@ -409,18 +355,10 @@
                         <legend>{group.category} ({group.items.length})</legend>
                         <div class="skill-tiles">
                             {#each group.items as skill}
-                                <button class="skill-tile {selectedSkill?.name === skill.name ? 'selected' : ''}"
-                                    on:click={() => selectedSkill = selectedSkill?.name === skill.name ? null : skill}>
+                                <div class="skill-tile" title={skill.name}>
                                     <span class="skill-logo"><img src={skill.icon} alt="" loading="lazy"></span>
-                                    <span class="flex flex-col min-w-0">
-                                        <span class="skill-name">{skill.name}</span>
-                                        {#if skill.jobs.length || skill.level}
-                                            <span class="skill-line">
-                                                {skill.jobs.length ? `Used at ${skill.jobs.length} job${skill.jobs.length === 1 ? '' : 's'}` : skill.level}
-                                            </span>
-                                        {/if}
-                                    </span>
-                                </button>
+                                    <span class="skill-name">{skill.name}</span>
+                                </div>
                             {/each}
                         </div>
                     </fieldset>
@@ -452,7 +390,7 @@
                     <fieldset>
                         <legend>Music</legend>
                         <div class="flex gap-[10px]">
-                            <img src="/images/xp/icons/MyMusic.png" alt="" class="w-[32px] h-[32px] shrink-0">
+                            <img src="/images/xp/icons/Spotify.svg" alt="" class="w-[32px] h-[32px] shrink-0">
                             <div class="grow min-w-0 flex flex-col gap-[8px]">
                                 {#if spotify?.top_tracks?.length}
                                     {#each [spotify.top_tracks[0]] as track}
@@ -492,7 +430,7 @@
                                 {/if}
 
                                 <div class="flex gap-[6px] flex-wrap">
-                                    <button class="xp-button" on:click={() => queueProgram.set({ path: './programs/my_music.svelte' })}>Open My Music...</button>
+                                    <button class="xp-button" on:click={() => queueProgram.set({ path: './programs/my_spotify.svelte' })}>Open My Spotify...</button>
                                     {#if interests.spotify?.profile}
                                         <button class="xp-button" on:click={() => globalThis.open(interests.spotify.profile, '_blank', 'noopener')}>Spotify Profile</button>
                                     {/if}
@@ -507,7 +445,7 @@
                     <fieldset>
                         <legend>Games</legend>
                         <div class="flex gap-[10px]">
-                            <img src="/images/xp/icons/GameController.png" alt="" class="w-[32px] h-[32px] shrink-0">
+                            <img src="/images/xp/icons/Steam.svg" alt="" class="w-[32px] h-[32px] shrink-0">
                             <div class="grow min-w-0 flex flex-col gap-[8px]">
                                 {#if steam}
                                     <div class="flex items-center gap-[8px]">
@@ -795,21 +733,9 @@
         align-items: center;
         gap: 3px;
         padding: 6px 2px;
-        border: 1px solid transparent;
-        border-radius: 3px;
-        background: transparent;
         font-size: 11px;
         color: #222;
         text-align: center;
-    }
-
-    .core-item:hover {
-        border-color: #d0d0bf;
-        background: linear-gradient(180deg, #fff, #f1f4fb);
-    }
-
-    .core-item:focus {
-        outline: 1px dotted #000;
     }
 
     .skill-tiles {
@@ -823,40 +749,16 @@
         align-items: center;
         gap: 6px;
         padding: 3px;
-        border: 0;
-        background: transparent;
-        text-align: left;
         font-size: 11px;
         color: #222;
         min-width: 0;
     }
 
-    .skill-tile:focus {
-        outline: 1px dotted #000;
-    }
-
-    .skill-name,
-    .skill-line {
+    .skill-name {
         padding: 0 2px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-    }
-
-    .skill-line {
-        color: #808080;
-    }
-
-    .skill-tile.selected .skill-name {
-        background: #316ac5;
-        color: #fff;
-    }
-
-    .skill-tile.selected .skill-logo::after {
-        content: '';
-        position: absolute;
-        inset: 2px;
-        background: rgba(49, 106, 197, 0.35);
     }
 
     /* ---------- ProgressBar (XP.css progress) ---------- */

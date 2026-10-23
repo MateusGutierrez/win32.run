@@ -20,7 +20,7 @@
 
     let iframe;
     let address_bar;
-    let homepage = url ? url : 'https://app.usepanda.com/#/';
+    let homepage = url ? url : 'https://bing.com/search?q=google';
     let history = [homepage];
     
     let page_index = 0;
@@ -264,7 +264,7 @@
                 }}></RButton>
             <RButton icon="/images/xp/icons/IEHome.png"
                 on_click={() => {
-                    address_bar.value = 'https://app.usepanda.com/#/';
+                    address_bar.value = 'https://bing.com/search?q=google';
                     load_page();
                 }}>
             </RButton>

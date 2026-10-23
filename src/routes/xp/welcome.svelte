@@ -104,7 +104,7 @@
         </button>
         <div class="footnote hidden sm:block text-right">
             <div>After you log on, you can explore my projects,</div>
-            <div>skills and experience in My Portfolio.</div>
+            <div>skills and experience in My Resume.</div>
         </div>
     </div>
 </div>

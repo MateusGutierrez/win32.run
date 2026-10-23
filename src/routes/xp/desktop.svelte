@@ -59,8 +59,7 @@
         loadjs([
             "https://www.gstatic.com/charts/loader.js",
             "/js/mammoth.browser.min.js",
-            "https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js",
-            "https://unpkg.com/@ruffle-rs/ruffle"
+            "https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js"
         ]);
 
         // The welcome (log on) screen opens the portfolio once the user clicks their name

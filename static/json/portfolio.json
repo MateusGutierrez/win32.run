@@ -3,7 +3,7 @@
   "title": "Software Developer",
   "photo": "https://github.com/MateusGutierrez.png",
   "location": "Brazil",
-  "resume_pdf": "/files/resume.pdf",
+  "resume_pdf": "/files/MateusMaiaGutierrez.pdf",
   "bio": "Software developer committed to technical excellence and human values. Believes that development goes beyond code, prioritizing collaboration, empathy and transparency. It continually seeks to create solutions that positively impact people's lives, aiming for a more inclusive and enriching digital experience.",
   "links": {
     "github": "https://github.com/MateusGutierrez",
@@ -13,8 +13,20 @@
   "experience": [
     {
       "role": "Software Developer",
+      "company": "Senior Sistemas",
+      "period": "April 2026 - Present",
+      "points": [
+        "Work on the Konviva Learning Management System (LMS), developing new features using AngularJS, ReactJS, Java/Spring, and Node.js/TypeScript.",
+        "Contributed to the creation of Claude Code skills to help AI generate code according to the company's established best practices and the Senior Way.",
+        "Develop backend services using Spring Boot (Java) and integrate relational and NoSQL databases, including MongoDB.",
+        "Responsible for code versioning, resolving complex technical issues, and fixing bugs.",
+        "Actively participate in Agile ceremonies (Scrum), strategic alignment, and the implementation of microfrontends and i18next for internationalization"
+      ]
+    },
+    {
+      "role": "Software Developer",
       "company": "Blender Digital",
-      "period": "Nov 2025 - Present",
+      "period": "Nov 2025 - Apr 2026",
       "points": [
         "Developing and maintaining web applications with React, TypeScript and Node.js.",
         "Building responsive interfaces with Tailwind CSS.",
@@ -72,9 +84,10 @@
     }
   ],
   "projects": [],
+  "core_stack": ["TypeScript", "React", "Angular", "Node.js", "Java", "Spring", "Tailwind CSS", "Mongo DB", "HTML/CSS"],
   "skills": {
-    "Languages": ["JavaScript", "TypeScript", "Python", "SQL", "HTML/CSS"],
-    "Frameworks": ["React", "Next.js", "Node.js", "Svelte", "Tailwind CSS", "Express", "Nest.js", "Fastify"],
+    "Languages": ["JavaScript", "TypeScript", "Java", "Python", "SQL", "HTML/CSS"],
+    "Frameworks": ["React", "Angular", "Next.js", "Node.js", "Spring", "Svelte", "Tailwind CSS", "Express", "Nest.js", "Fastify"],
     "Tools": ["Git", "Docker", "AWS", "PostgreSQL", "Linux", "CI/CD", "Supabase", "Mongo DB"]
   },
   "certifications": [],

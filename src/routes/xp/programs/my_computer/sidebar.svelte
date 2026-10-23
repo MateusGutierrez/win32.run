@@ -1,6 +1,7 @@
 
 <script>
-    import {my_music_id, my_pictures_id} from '../../../../lib/system';
+    import {my_pictures_id} from '../../../../lib/system';
+    import { queueProgram } from '../../../../lib/store';
     import * as fs from '../../../../lib/fs';
     export let my_computer_instance = {};
     
@@ -53,9 +54,9 @@
                     action: () => { my_computer_instance.open(my_pictures_id) }
                 },
                 {
-                    name: 'My Music',
-                    icon: 'MyMusic.png',
-                    action: () => { my_computer_instance.open(my_music_id) }
+                    name: 'My Spotify',
+                    icon: 'Spotify.svg',
+                    action: () => { queueProgram.set({ path: './programs/my_spotify.svelte' }) }
                 },
                 {
                     name: 'My Network Places',

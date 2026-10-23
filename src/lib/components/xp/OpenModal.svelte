@@ -1,7 +1,7 @@
 <script>
     import Window from './Window.svelte';
     import { hardDrive, selectingItems} from '../../store';
-    import {my_pictures_id, my_music_id, desktop_folder} from '../../system';
+    import {my_pictures_id, desktop_folder} from '../../system';
     import * as utils from '../../utils';
     import * as finder from '../../finder'
 
@@ -28,11 +28,6 @@
             id: my_pictures_id,
             name: 'My Pictures',
             icon: '/images/xp/icons/MyPictures.png'
-        },
-        {
-            id: my_music_id,
-            name: 'My Music',
-            icon: '/images/xp/icons/MyMusic.png'
         },
         {
             id: null,

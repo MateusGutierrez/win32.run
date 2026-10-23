@@ -1,12 +1,12 @@
 <script>
     import {hardDrive, queueProgram } from '../../lib/store';
-    import { my_pictures_id, my_music_id } from '../../lib/system';
+    import { my_pictures_id } from '../../lib/system';
     import * as utils from '../../lib/utils';
     const { click_outside } = utils;
 
     let col_1 = [
         {
-            name: 'My Portfolio',
+            name: 'My Resume',
             icon: '/images/xp/icons/Briefcase.png',
             path: './programs/portfolio.svelte',
             font: 'bold'
@@ -29,18 +29,6 @@
             name: 'Media Player Classic',
             icon: '/images/xp/icons/MPC.png',
             path: './programs/media_player_classic.svelte',
-            
-        },
-        {
-            name: 'Foxit Reader',
-            icon: '/images/xp/icons/FoxitReader.png',
-            path: './programs/foxit_reader.svelte',
-            
-        },
-        {
-            name: 'Koodo Reader',
-            icon: '/images/xp/icons/Koodo.png',
-            path: './programs/koodo.svelte',
             
         },
         {
@@ -72,10 +60,9 @@
             font: 'bold'
         },
         {
-            name: 'My Music',
-            icon: '/images/xp/icons/MyMusic.png',
-            path: './programs/my_computer.svelte',
-            fs_item: {id: my_music_id},
+            name: 'My Spotify',
+            icon: '/images/xp/icons/Spotify.svg',
+            path: './programs/my_spotify.svelte',
             font: 'bold'
         },
         {
@@ -102,11 +89,6 @@
             link: 'https://docs.win32.run'
         },
         null,
-        {
-            name: 'Installer',
-            icon: '/images/xp/icons/Programs.png',
-            path: './programs/app_installer.svelte'
-        },
         {
             name: 'Search',
             icon: '/images/xp/icons/Search.png',
@@ -362,35 +344,6 @@
             name: 'Media Player Classic',
             icon: '/images/xp/icons/MPC.png',
             path: './programs/media_player_classic.svelte',
-            
-        },
-        {
-            name: 'Foxit Reader',
-            icon: '/images/xp/icons/FoxitReader.png',
-            path: './programs/foxit_reader.svelte',
-            
-        },
-        {
-            name: 'Flash Player',
-            icon: '/images/xp/icons/FlashPlayer.png',
-            path: './programs/flash_player.svelte',
-            
-        },
-        {
-            name: 'Python REPL',
-            icon: '/images/xp/icons/Python.png',
-            path: './programs/webapp.svelte',
-            "webapp": {
-                "background": "#000000",
-                "url": "https://pyodide.org/en/stable/console.html",
-                "name": "Python REPL",
-                "icon": "/images/xp/icons/Python.png"
-            },
-        },
-        {
-            name: 'Koodo Reader',
-            icon: '/images/xp/icons/Koodo.png',
-            path: './programs/koodo.svelte',
             
         },
         {

@@ -39,7 +39,6 @@
     "is-valid-http-url": "^1.0.3",
     "jsdom": "^20.0.3",
     "jszip": "^3.10.1",
-    "link-preview-js": "^3.0.4",
     "lodash": "^4.17.21",
     "node-dir": "^0.1.17",
     "short-uuid": "^4.2.2",

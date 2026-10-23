@@ -1,4 +1,4 @@
-// Shared loaders for the portfolio, "My Music" and "My Games" windows.
+// Shared loaders for the portfolio, "My Spotify" and "My Games" windows.
 // Short in-memory caching keeps several open windows from repeating the same requests.
 import axios from 'axios';
 

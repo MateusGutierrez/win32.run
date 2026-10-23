@@ -191,8 +191,8 @@
         {
             title: 'Other Places',
             items: [
-                { name: 'My Music', icon: 'MyMusic.png', action: () => open_program('./programs/my_music.svelte') },
-                { name: 'My Portfolio', icon: 'Briefcase.png', action: () => open_program('./programs/portfolio.svelte') }
+                { name: 'My Spotify', icon: 'Spotify.svg', action: () => open_program('./programs/my_spotify.svelte') },
+                { name: 'My Resume', icon: 'Briefcase.png', action: () => open_program('./programs/portfolio.svelte') }
             ]
         },
         {
@@ -225,7 +225,7 @@
         min_height: 360,
         width: Math.min(ws_size.width - 20, 780),
         height: Math.min(ws_size.height - 20, 560),
-        icon: '/images/xp/icons/GameController.png',
+        icon: '/images/xp/icons/Steam.svg',
         id: id,
         exec_path
     };
@@ -256,7 +256,7 @@
         <div class="shrink-0 flex flex-row items-center gap-[4px] border-b border-[#d6d2c2] px-[4px] py-[2px]">
             <span class="text-[#7f7f7f] px-[4px]">Address</span>
             <div class="address grow">
-                <img src="/images/xp/icons/GameController.png" alt="" class="w-[16px] h-[16px]">
+                <img src="/images/xp/icons/Steam.svg" alt="" class="w-[16px] h-[16px]">
                 <span class="truncate">My Games</span>
             </div>
             <div class="flex items-center gap-[3px] pr-[4px]">

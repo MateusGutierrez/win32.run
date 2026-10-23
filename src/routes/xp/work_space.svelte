@@ -173,32 +173,8 @@
             runningPrograms.update(values => {
                 return [...values, program];
             })
-        } else if(path == './programs/foxit_reader.svelte'){
-            const Program = (await import('./programs/foxit_reader.svelte')).default;
-            let program = new Program({
-                target: node_ref,
-                props: {id: short.generate(), parentNode: node_ref, fs_item, exec_path: path}
-            });
-            program.self = program;
-            
-            //add to program tray
-            runningPrograms.update(values => {
-                return [...values, program];
-            })
         } else if(path == './programs/microsoft_word.svelte'){
             const Program = (await import('./programs/microsoft_word.svelte')).default;
-            let program = new Program({
-                target: node_ref,
-                props: {id: short.generate(), parentNode: node_ref, fs_item, exec_path: path}
-            });
-            program.self = program;
-            
-            //add to program tray
-            runningPrograms.update(values => {
-                return [...values, program];
-            })
-        } else if(path == './programs/koodo.svelte'){
-            const Program = (await import('./programs/koodo.svelte')).default;
             let program = new Program({
                 target: node_ref,
                 props: {id: short.generate(), parentNode: node_ref, fs_item, exec_path: path}
@@ -265,33 +241,9 @@
                 props: {id: short.generate(), parentNode: node_ref, copying_obj, target_folder_id, exec_path: path}
             });
             program.self = program;
-        } else if(path == './programs/app_installer.svelte'){
-
-            const Program = (await import('./programs/app_installer.svelte')).default;
-            let program = new Program({
-                target: node_ref,
-                props: {id: short.generate(), parentNode: node_ref, copying_obj, target_folder_id, exec_path: path}
-            });
-            program.self = program;
-            //add to program tray
-            runningPrograms.update(values => {
-                return [...values, program];
-            })
-        } else if(path == './programs/flash_player.svelte'){
-            const Program = (await import('./programs/flash_player.svelte')).default;
-            let program = new Program({
-                target: node_ref,
-                props: {id: short.generate(), parentNode: node_ref, fs_item, exec_path: path}
-            });
-            program.self = program;
-
-            //add to program tray
-            runningPrograms.update(values => {
-                return [...values, program];
-            })
-        } else if(path == './programs/my_music.svelte' || path == './programs/my_games.svelte'){
-            const Program = path == './programs/my_music.svelte'
-                ? (await import('./programs/my_music.svelte')).default
+        } else if(path == './programs/my_spotify.svelte' || path == './programs/my_games.svelte'){
+            const Program = path == './programs/my_spotify.svelte'
+                ? (await import('./programs/my_spotify.svelte')).default
                 : (await import('./programs/my_games.svelte')).default;
             let program = new Program({
                 target: node_ref,
@@ -321,7 +273,7 @@
     }
 
     async function get_url(item){
-        if(item == null) return 'https://app.usepanda.com/#/';
+        if(item == null) return 'https://bing.com/search?q=google';
 
         if(item.storage_type == 'local'){
             return finder.to_url(item.id);
