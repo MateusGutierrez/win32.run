@@ -11,3 +11,4 @@ node_modules
 build.zip
 win32_rsa
 win32_rsa.pub
+/.vercel
