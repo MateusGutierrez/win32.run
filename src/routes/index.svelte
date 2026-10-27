@@ -105,7 +105,12 @@
     let width = window.innerWidth;
     let height = window.innerHeight;
     let zoom = 1;
-    if(width <= 800 || height <= 500){
+    // Inside an iframe (the 3D room) the host already sizes the page; a fractional
+    // zoom here would blur the pixel font
+    let embedded = window.self !== window.top;
+    if(embedded){
+        zoom = 1;
+    } else if(width <= 800 || height <= 500){
         zoom = 0.8;
     } else if(width <= 900 || height <= 600){
         zoom = 0.9
