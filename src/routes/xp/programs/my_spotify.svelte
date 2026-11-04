@@ -1,12 +1,12 @@
 <script>
-    // "My Music": an XP Explorer window listing my Spotify music (playlist, top tracks,
-    // recently played) with a Windows Media Player style bar at the bottom.
+    // "My Music": an XP Explorer window listing my Spotify playlist
+    // with a Windows Media Player style bar at the bottom.
     import Window from '../../../lib/components/xp/Window.svelte';
     import Menu from '../../../lib/components/xp/Menu.svelte';
     import RButton from '../../../lib/components/xp/RButton.svelte';
     import TaskPane from '../../../lib/components/xp/TaskPane.svelte';
     import { runningPrograms, queueProgram } from '../../../lib/store';
-    import { fetch_profile, fetch_spotify, spotify_embed_url, format_ms, format_date, time_ago } from '../../../lib/interests';
+    import { fetch_profile, fetch_spotify, spotify_embed_url, format_ms, format_date } from '../../../lib/interests';
     import { onMount } from 'svelte';
 
     export let id;
@@ -44,26 +44,6 @@
             url: playlist?.url || embed_url || null,
             date_column: 'Date Added',
             rows: (playlist?.tracks || []).map(e => ({ track: e.track, date: format_date(e.added_at) }))
-        },
-        top: {
-            label: 'Top Tracks This Month',
-            title: 'Top Tracks This Month',
-            description: 'The songs I played the most on Spotify over the last four weeks.',
-            meta: spotify?.top_tracks?.length ? `${spotify.top_tracks.length} songs` : '',
-            image: spotify?.top_tracks?.[0]?.image || null,
-            url: profile_url || null,
-            date_column: '',
-            rows: (spotify?.top_tracks || []).map(track => ({ track, date: '' }))
-        },
-        recent: {
-            label: 'Recently Played',
-            title: 'Recently Played',
-            description: 'The last songs I listened to on Spotify.',
-            meta: spotify?.recent?.length ? `${spotify.recent.length} songs` : '',
-            image: spotify?.recent?.[0]?.track?.image || null,
-            url: profile_url || null,
-            date_column: 'Played',
-            rows: (spotify?.recent || []).map(e => ({ track: e.track, date: time_ago(e.played_at) }))
         }
     };
 
@@ -155,9 +135,7 @@
             name: 'View',
             items: [
                 [
-                    { name: views.playlist.label, action: () => go('playlist') },
-                    { name: 'Top Tracks This Month', action: () => go('top') },
-                    { name: 'Recently Played', action: () => go('recent') }
+                    { name: views.playlist.label, action: () => go('playlist') }
                 ],
                 [{ name: 'Refresh', action: load }]
             ]
@@ -184,9 +162,7 @@
         {
             title: 'Library',
             items: [
-                { name: views.playlist.label, icon: 'WMPPlaylist.png', action: () => go('playlist') },
-                { name: 'Top Tracks This Month', icon: 'WMPAutoPlaylist.png', action: () => go('top') },
-                { name: 'Recently Played', icon: 'WMPLibrary.png', action: () => go('recent') }
+                { name: views.playlist.label, icon: 'WMPPlaylist.png', action: () => go('playlist') }
             ]
         },
         {
@@ -204,13 +180,7 @@
                     title: playlist.name,
                     lines: [`Playlist, ${playlist.total} songs`, ...(playlist.owner ? [`By ${playlist.owner}`] : [])]
                 }
-                : spotify?.top_tracks?.[0]
-                    ? {
-                        image: spotify.top_tracks[0].image,
-                        title: spotify.top_tracks[0].name,
-                        lines: [spotify.top_tracks[0].artists, 'My most played song this month']
-                    }
-                    : { title: 'My Music', lines: [spotify ? 'Music from my Spotify account.' : 'Spotify is not connected.'] }
+                : { title: 'My Music', lines: [spotify ? 'Music from my Spotify account.' : 'Spotify is not connected.'] }
         }
     ];
 
@@ -262,8 +232,6 @@
                 <img src="/images/xp/icons/Spotify.svg" alt="" class="w-[16px] h-[16px] shrink-0">
                 <select value={view} on:change={(e) => go(e.target.value)} aria-label="Address">
                     <option value="playlist">My Spotify\{views.playlist.label}</option>
-                    <option value="top">My Spotify\Top Tracks This Month</option>
-                    <option value="recent">My Spotify\Recently Played</option>
                 </select>
                 <span class="combo-arrow" aria-hidden="true">
                     <svg viewBox="0 0 8 5" width="8" height="5"><path d="M0 0h8L4 5z" fill="#4d6185"/></svg>

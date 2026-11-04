@@ -5,9 +5,8 @@ import { cached } from '$lib/server/cache';
 // Get the refresh token once with: node scripts/spotify-auth.mjs
 
 const API = 'https://api.spotify.com/v1';
-// Nothing here needs to be real time: recent history every 10 min, tops and playlist every hour
-const RECENT_TTL = 10 * 60 * 1000;
-const TOP_TTL = 60 * 60 * 1000;
+// Only the portfolio playlist is shown; refresh it every hour
+const PLAYLIST_TTL = 60 * 60 * 1000;
 
 let token = { value: null, expires: 0 };
 // Spotify may hand back a new refresh token; keep using the newest one while the server runs
@@ -82,29 +81,6 @@ function clean_text(html) {
         .trim();
 }
 
-async function load_recent() {
-    const recent = await spotify_get('/me/player/recently-played?limit=10');
-    const recent_list = (recent?.items || [])
-        .filter(i => i.track)
-        .map(i => ({ played_at: i.played_at, track: simplify_track(i.track) }));
-    return { recent: recent_list };
-}
-
-async function load_top() {
-    const [tracks, artists] = await Promise.all([
-        spotify_get('/me/top/tracks?time_range=short_term&limit=10'),
-        spotify_get('/me/top/artists?time_range=short_term&limit=6')
-    ]);
-    return {
-        top_tracks: (tracks?.items || []).map(simplify_track),
-        top_artists: (artists?.items || []).map(a => ({
-            name: a.name,
-            image: pick_image(a.images, 64),
-            url: a.external_urls?.spotify
-        }))
-    };
-}
-
 // Playlist contents are only returned for playlists the account owns or collaborates on
 async function load_playlist() {
     const id = playlist_id();
@@ -137,29 +113,20 @@ export async function GET() {
         return { status: 200, body: { configured: false } };
     }
 
-    // Load each part independently, so one failing doesn't hide the others
-    const [recent, top, playlist] = await Promise.allSettled([
-        cached('spotify:recent', RECENT_TTL, load_recent),
-        cached('spotify:top', TOP_TTL, load_top),
-        cached('spotify:playlist', TOP_TTL, load_playlist)
-    ]);
-
-    if (recent.status === 'rejected' && top.status === 'rejected' && playlist.status === 'rejected') {
-        console.error('[api/spotify]', recent.reason?.message, top.reason?.message, playlist.reason?.message);
+    let playlist;
+    try {
+        playlist = await cached('spotify:playlist', PLAYLIST_TTL, load_playlist);
+    } catch (err) {
+        console.error('[api/spotify] playlist:', err?.message);
         return { status: 502, body: { configured: true, error: 'Spotify is unavailable right now' } };
     }
-    if (recent.status === 'rejected') console.error('[api/spotify] recently played:', recent.reason?.message);
-    if (top.status === 'rejected') console.error('[api/spotify] top items:', top.reason?.message);
-    if (playlist.status === 'rejected') console.error('[api/spotify] playlist:', playlist.reason?.message);
 
     return {
         status: 200,
         headers: { 'cache-control': 'public, max-age=300' },
         body: {
             configured: true,
-            ...(recent.status === 'fulfilled' ? recent.value : { recent: [] }),
-            ...(top.status === 'fulfilled' ? top.value : { top_tracks: [], top_artists: [] }),
-            ...(playlist.status === 'fulfilled' ? playlist.value : { playlist: null }),
+            ...playlist,
             updated_at: Date.now()
         }
     };

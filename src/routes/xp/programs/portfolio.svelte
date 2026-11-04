@@ -33,7 +33,7 @@
     let spotify = null;
 
     $: interests = profile?.interests || {};
-    $: hasSpotifyLive = !!(spotify?.top_tracks?.length || spotify?.recent?.length || spotify?.playlist);
+    $: hasSpotifyLive = !!spotify?.playlist;
     $: hasInterests = !!(
         steam || hasSpotifyLive ||
         interests.spotify?.embed || interests.spotify?.profile ||
@@ -392,39 +392,23 @@
                         <div class="flex gap-[10px]">
                             <img src="/images/xp/icons/Spotify.svg" alt="" class="w-[32px] h-[32px] shrink-0">
                             <div class="grow min-w-0 flex flex-col gap-[8px]">
-                                {#if spotify?.top_tracks?.length}
-                                    {#each [spotify.top_tracks[0]] as track}
-                                        <div class="flex gap-[8px] items-center">
-                                            {#if track.image}
-                                                <img src={track.image} alt={track.album} class="thumb w-[56px] h-[56px] shrink-0">
-                                            {/if}
-                                            <div class="min-w-0 grow flex flex-col gap-[3px]">
-                                                <span>My most played song this month:</span>
-                                                <a href={track.url} target="_blank" rel="noopener" class="truncate"><b>{track.name}</b></a>
-                                                <span class="truncate">{track.artists}</span>
-                                            </div>
+                                {#if spotify?.playlist}
+                                    <div class="flex gap-[8px] items-center">
+                                        {#if spotify.playlist.image}
+                                            <img src={spotify.playlist.image} alt="" class="thumb w-[56px] h-[56px] shrink-0">
+                                        {/if}
+                                        <div class="min-w-0 grow flex flex-col gap-[3px]">
+                                            <span>A playlist I made:</span>
+                                            <a href={spotify.playlist.url} target="_blank" rel="noopener" class="truncate"><b>{spotify.playlist.name}</b></a>
+                                            <span class="truncate">{spotify.playlist.total} songs</span>
                                         </div>
-                                    {/each}
-                                    {#if spotify.top_tracks.length > 1}
-                                        <div class="flex flex-col gap-[4px]">
-                                            <span>Also on repeat:</span>
-                                            <div class="flex gap-[4px] flex-wrap">
-                                                {#each spotify.top_tracks.slice(1, 7) as track}
-                                                    <a href={track.url} target="_blank" rel="noopener" title="{track.name} - {track.artists}">
-                                                        <img src={track.image} alt={track.name} class="thumb w-[40px] h-[40px]" loading="lazy">
-                                                    </a>
-                                                {/each}
-                                            </div>
-                                        </div>
-                                    {/if}
-                                {:else if spotify?.playlist}
-                                    <span>My playlist: <b>{spotify.playlist.name}</b></span>
+                                    </div>
                                 {:else}
-                                    <span>Some of the music I'm into lately.</span>
+                                    <span>A playlist I made with some of my favorite songs.</span>
                                 {/if}
 
-                                {#if !hasSpotifyLive && spotify_embed_url(interests.spotify?.embed)}
-                                    <iframe title="Spotify playlist" src={spotify_embed_url(interests.spotify.embed)}
+                                {#if spotify_embed_url(spotify?.playlist?.url || interests.spotify?.embed)}
+                                    <iframe title="Spotify playlist" src={spotify_embed_url(spotify?.playlist?.url || interests.spotify.embed)}
                                         class="w-full h-[80px] border-0" loading="lazy"
                                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                                 {/if}
